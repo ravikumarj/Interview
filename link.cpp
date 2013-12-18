@@ -285,6 +285,7 @@ void frontBackSplit(struct Node *head,struct Node **front,struct Node **back)
 	slow->next=NULL;
 	*back=temp;
 }
+//sortedi list Duplicate removal
 void removeDuplicate(struct Node *head)
 {
 	struct Node *current=head;
@@ -305,6 +306,12 @@ void removeDuplicate(struct Node *head)
 
 
 }
+/*void removeDuplicate_unsorted(struct Node *head)
+{
+mergeSort(head);
+removeDuplicate(head);
+
+} */
 
 
 
@@ -557,6 +564,46 @@ void recursiveReverse(struct Node **head)
 	
 	*head=rest;
 }
+
+
+void removeDuplicate_unsorted(struct Node *head)
+{
+/*mergeSort(&head);
+removeDuplicate(head);
+cout<<"\nRemove Duplicate ... \n";
+*/
+
+struct Node *cur1=head;
+struct Node *cur2=head->next;
+struct Node *tmp,*prev;
+while(cur1->next!=NULL)
+	{
+	cur2=cur1->next;
+	prev=cur1;
+	while(cur2!=NULL)
+		{
+		if(cur1->data==cur2->data)
+			{
+			tmp=cur2;
+			prev->next=cur2->next;
+			delete(tmp);
+			}
+		else
+			{
+			prev=cur2;
+			cur2=cur2->next;
+			}
+		}	
+	cur1=cur1->next;
+	}
+			
+
+printlist(head);
+
+}
+
+
+
 main()
 {
 
@@ -617,7 +664,7 @@ main()
 	//	printlist(head2);
 	cout<<"\nHead 2\n";
 	insertSort(&head2);
-	printlist(head2);
+	printlist(head);
 	//	cout<<"\nAfter append\n";
 	//	append(&head,&head2);
 	//	printlist(head);
@@ -696,20 +743,21 @@ main()
 		printlist(even);
 		cout<<"\nOdd\n";
 		printlist(odd); */
-	cout<<"\n";
+/*	cout<<"\n";
 	printlist(head);
 	cout<<"\nMerge Sort\n";
 	int inv=mergeSort(&head);
 	printlist(head);
-	cout<<"\nInversion count= "<<inv; 
+	cout<<"\nInversion count= "<<inv; */
 
 	/*cout<<"\nIntersection\n";
 	  struct Node *result=sortedIntersect(even,odd);
 	  printlist(result);*/
-
-	cout<<"\nAfter Reverse\n";
+	cout<<"\n";
+	removeDuplicate_unsorted(head);
+/*	cout<<"\nAfter Reverse\n";
 	recursiveReverse(&head);
-	printlist(head);
+	printlist(head);*/
 
 
 }
