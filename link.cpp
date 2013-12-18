@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdio.h>
+#include"hash.h"
 using namespace std;
 struct Node
 {
@@ -568,12 +569,19 @@ void recursiveReverse(struct Node **head)
 
 void removeDuplicate_unsorted(struct Node *head)
 {
+
+/******** Method 1 *********/
+/**** Sort the list and remove duplicate nlogn ******/
 /*mergeSort(&head);
 removeDuplicate(head);
 cout<<"\nRemove Duplicate ... \n";
 */
 
-struct Node *cur1=head;
+
+/******** Method 2 *********/
+/**** Brute Force n^2 ******/
+
+/*struct Node *cur1=head;
 struct Node *cur2=head->next;
 struct Node *tmp,*prev;
 while(cur1->next!=NULL)
@@ -597,6 +605,35 @@ while(cur1->next!=NULL)
 	cur1=cur1->next;
 	}
 			
+*/
+
+
+/******** Method 3 *********/
+/**** Use Hashtable to figure out whether the element is already present ******/
+Hashtable *hash_ptr;
+hash_ptr=init(10);
+struct Node *cur=head;
+struct Node *prev,*tmp;
+add(hash_ptr,cur->data);
+prev=cur;
+cur=cur->next;
+while(cur!=NULL)
+	{
+	if(add(hash_ptr,cur->data)==false)
+		{
+		tmp=cur;
+		prev->next=cur->next;
+		delete(tmp);
+		cur=tmp->next;
+		}
+	else
+		{
+		prev=cur;
+		cur=cur->next;
+		}
+	}
+		
+	
 
 printlist(head);
 
