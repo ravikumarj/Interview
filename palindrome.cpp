@@ -191,6 +191,25 @@ printlist(second_half);
 
 	return res;
 }
+bool isPal_rec(struct Node **left,struct Node *right)
+{
+
+	if(right==NULL)
+	{
+		return true;
+	}
+	bool ret=isPal_rec(left,right->next);
+	if(((*left)->data== right->data)&&(ret==true))
+	{
+		(*left)=(*left)->next;
+		return true;
+	}
+	
+	return false;
+	
+
+}
+
 
 
 main()
@@ -204,7 +223,8 @@ main()
 	cout<<"\nHead\n";
 	printlist(head);
 	cout<<"\n";
-	int res=palindrome(head);
+	struct Node *right=head;
+	int res=isPal_rec(&right,head);
 	cout<<"\nPalindrome == "<<res;
 	cout<<"\nlist after test\n";
 	printlist(head);
