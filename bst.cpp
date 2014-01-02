@@ -67,13 +67,34 @@ int count(struct node *root)
 	if(root != NULL)
 	{
 			left=count(root->left);
-			right=1+count(root->right);
+			right=count(root->right)+1;
 		return left+right;
 	}
 	else
 	{
 		return 0;
 	}
+}
+
+int maxDepth(struct node *root)
+{
+	int left=0,right=0;
+	if(root==NULL)
+		return 0;
+	else
+	{
+		left=maxDepth(root->left);
+		right=maxDepth(root->right);
+		if(left>right)
+			{
+			return left+1;
+			}
+		else
+			{
+			return right+1;
+			}
+	}
+
 }
 
 
@@ -87,11 +108,12 @@ main()
 	tree=insert(tree,3);
 	tree=insert(tree,8);
 	tree=insert(tree,6);
-	tree=insert(tree,7);
 
 	cout<<lookup(tree,5);
 	cout<<"\n"<<lookup(tree,3);
 
 	int c=count(tree);
 	cout<<"\nnumber of nodes "<<c<<endl;
+	int height=maxDepth(tree);
+	cout<<"\nDepth -->"<<height;
 }
