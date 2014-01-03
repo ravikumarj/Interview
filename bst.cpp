@@ -121,7 +121,7 @@ print(root->right);
 
 bool hasPath(struct node *root,int sum)
 {
-	i//Empty tree
+	//Empty tree
 	if(root == NULL)
 	{
 		return(sum == 0);
@@ -142,6 +142,34 @@ bool hasPath(struct node *root,int sum)
 
 	}
 }
+void printArr(int path[],int len)
+{
+	cout<<endl;
+	for(int i=0;i<len;i++)
+	{
+		cout<<path[i]<<"\t";
+	}
+	cout<<endl;
+}
+void printPathR(struct node *root,int path[],int len)
+{
+	path[len]=root->data;
+	len++;
+	if((root->left == NULL)&&(root->right == NULL))
+	{
+		printArr(path,len);
+	}
+	if(root->left)
+		printPathR(root->left,path,len);
+	if(root->right)
+		printPathR(root->right,path,len);
+}
+
+void printPath(struct node *tree)
+{
+	int path[1000];
+	printPathR(tree,path,0);
+}
 main()
 {
 	struct node *tree=NULL;
@@ -149,10 +177,10 @@ main()
 	tree=insert(tree,4);
 	tree=insert(tree,3);
 
-/*	tree=insert(tree,8);
-	tree=insert(tree,6);
-	tree=insert(tree,2);
-	tree=insert(tree,1);*/
+		tree=insert(tree,8);
+		tree=insert(tree,6);
+		tree=insert(tree,2);
+		tree=insert(tree,1);
 
 	cout<<lookup(tree,5);
 	cout<<"\n"<<lookup(tree,3);
@@ -169,4 +197,5 @@ main()
 	cout<<"\nHas Sum\n";
 	cout<<hasPath(tree,12)<<endl;;
 	cout<<hasPath(tree,9);
+printPath(tree);
 }
