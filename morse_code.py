@@ -211,5 +211,32 @@ if __name__ == '__main__':
     obj.decode(root)
     print_result()
 
+# Test case
+'''
+INPUT
+
+.--.....--   .....--....
+--.----..   .--.-.----..
+.--.....--   .--.
+..-.-.-....--.-..-.--.-.
+..--   .-...--..-.--
+----        ..--
+*
+
+
+OUTPUT
+WHAT
+HATH
+GOD
+WROTH?
+WHAT
+AN
+EARTHQUAKE
+IM!
+READY
+TO
+IM!
+'''
+
 
 
